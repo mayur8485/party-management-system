@@ -1,0 +1,33 @@
+<table class="table" *ngIf="parties.length>0">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">FullName</th>
+      <th scope="col">Address</th>
+      <th scope="col">Mobile Number</th>
+      <th scope="col">Party Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let party of parties">
+      <th scope="row">{{party.id}}</th>
+      <td>{{party.fullName}}</td>
+      <td>{{party.address}}</td>
+      <td>{{party.mobileNo}}</td>
+      <td>{{party.date}}</td>
+      <td>{{party.time}}</td>
+      <td>
+        <div class="dropdown">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Update</a></li>
+            <li><a class="dropdown-item" href="#">Delete</a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
