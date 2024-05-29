@@ -22,7 +22,7 @@ export class CreatePartyComponent implements OnInit, OnDestroy {
       id: new FormControl(""),
       fullName: new FormControl("", { validators: [Validators.required] }),
       address: new FormControl("", { validators: [Validators.required] }),
-      mobileNo: new FormControl("", { validators: [Validators.required] }),
+      mobileNo: new FormControl("", { validators: [Validators.required, Validators.maxLength(10)] }),
       date: new FormControl("", { validators: [Validators.required] }),
       time: new FormControl("", { validators: [Validators.required] })
     })
@@ -62,6 +62,7 @@ export class CreatePartyComponent implements OnInit, OnDestroy {
   onCreatePartyDetails() {
     if (this.partyForm.valid) {
       const partyDetail = this.partyForm.getRawValue();
+      console.log(partyDetail)
       partyDetail.id = this.getRandomNumber();
       if (this.datastoreService.createPartyDetails(partyDetail)) {
         this.partyForm.reset();

@@ -10,6 +10,7 @@ import { CreatePartyComponent } from './main/create-party/create-party.component
 import { PartyDetailsComponent } from './main/party-details/party-details.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomepageComponent } from './main/homepage/homepage.component';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HomepageComponent } from './main/homepage/homepage.component';
     SidebarComponent,
     CreatePartyComponent,
     PartyDetailsComponent,
-    HomepageComponent
+    HomepageComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
