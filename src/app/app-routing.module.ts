@@ -3,29 +3,39 @@ import { CreatePartyComponent } from "./main/create-party/create-party.component
 import { NgModule } from "@angular/core";
 import { PartyDetailsComponent } from "./main/party-details/party-details.component";
 import { HomepageComponent } from "./main/homepage/homepage.component";
+import { AuthGuard } from "./auth/auth.guard";
+import { AuthComponent } from "./auth/auth.component";
 
 const appRoutes: Routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
     {
-        path: '',
+        path: 'home',
         component: HomepageComponent,
         pathMatch: 'full'
     },
     {
+        path: 'auth',
+        component: AuthComponent,
+    },
+    {
         path: 'create',
         component: CreatePartyComponent,
-
+        canActivate: [AuthGuard]
     },
     {
         path: 'party',
         component: PartyDetailsComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'party/:id/edit',
-        component: CreatePartyComponent
+        component: CreatePartyComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'party/:id/delete',
-        component: CreatePartyComponent
+        component: CreatePartyComponent,
+        canActivate: [AuthGuard]
     }
 ]
 
