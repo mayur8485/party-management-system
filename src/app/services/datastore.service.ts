@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { PartyDetails } from "../main/models/partyDetails.model";
+import { PartyDetails } from "../models/partyDetails.model";
 import { Subject } from "rxjs";
 
 @Injectable({
@@ -9,7 +9,7 @@ export class DatastoreService {
     partyDetailsSubject = new Subject<PartyDetails[]>();
     private partyDetails: PartyDetails[] = [
         {
-            "id": "83647382719",
+            "id": "8364738271",
             "fullName": "Mayuresh Takawane",
             "address": "Flat C206, Sundamr, solpur road manjri bk, pune-412307",
             "mobileNo": "9876543210",
@@ -17,7 +17,7 @@ export class DatastoreService {
             "time": "10:00"
         },
         {
-            "id": "93497382726",
+            "id": "9349738276",
             "fullName": "Mayuresh Takawane",
             "address": "Flat C206, Sundamr, solpur road manjri bk, pune-412307",
             "mobileNo": "9876543210",
@@ -31,21 +31,24 @@ export class DatastoreService {
     }
 
     createPartyDetails(partyDetails: PartyDetails) {
-        this.partyDetails.push({...partyDetails});
+        this.partyDetails.push({ ...partyDetails });
         this.partyDetailsSubject.next(this.partyDetails);
         return true
     }
 
-    updatePartyDetails() {
-
+    updatePartyDetails(partyDetail: PartyDetails) {
+        this.partyDetails = this.partyDetails.filter((x: any) => x.id !== partyDetail.id);
+        this.partyDetails.push(partyDetail);
+        this.partyDetailsSubject.next(this.partyDetails);
     }
 
-    deletePartyDetails() {
-
+    deletePartyDetails(partyDetail: PartyDetails) {
+        this.partyDetails = this.partyDetails.filter((x: any) => x.id !== partyDetail.id);
+        this.partyDetailsSubject.next(this.partyDetails);
     }
 
-    getPartyDetailById() {
-
+    getPartyDetailById(id: string) {
+        return this.partyDetails.filter(x => x.id === id);
     }
 
 }

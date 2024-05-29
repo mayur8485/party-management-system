@@ -1,8 +1,8 @@
-<table class="table" *ngIf="parties.length>0">
+<table class="table">
   <thead>
     <tr>
-      <th scope="col">Id</th>
-      <th scope="col">FullName</th>
+      <th scope="col">Sr No</th>
+      <th scope="col">Full Name</th>
       <th scope="col">Address</th>
       <th scope="col">Mobile Number</th>
       <th scope="col">Party Date</th>
@@ -11,8 +11,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let party of parties">
-      <th scope="row">{{party.id}}</th>
+    <tr *ngFor="let party of parties; let i = index">
+      <th scope="row">{{i+1}}</th>
       <td>{{party.fullName}}</td>
       <td>{{party.address}}</td>
       <td>{{party.mobileNo}}</td>
@@ -23,11 +23,12 @@
           <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Update</a></li>
-            <li><a class="dropdown-item" href="#">Delete</a></li>
+            <li><a class="dropdown-item" [routerLink]="[party.id,'edit']">Update</a></li>
+            <li><a class="dropdown-item" [routerLink]="[party.id,'delete']">Delete</a></li>
           </ul>
         </div>
       </td>
     </tr>
   </tbody>
 </table>
+<router-outlet></router-outlet>
