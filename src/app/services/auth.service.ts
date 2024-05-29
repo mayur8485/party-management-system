@@ -38,4 +38,10 @@ export class AuthService {
             this.router.navigate(['/auth']);
         }
     }
+
+    logOut() {
+        this.user.next(null);
+        this.router.navigate(['auth']);
+        localStorage.removeItem('userDetails');
+    }
 }
