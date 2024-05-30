@@ -23,6 +23,7 @@ export class CreatePartyComponent implements OnInit, OnDestroy {
       fullName: new FormControl("", { validators: [Validators.required] }),
       address: new FormControl("", { validators: [Validators.required] }),
       mobileNo: new FormControl("", { validators: [Validators.required, Validators.maxLength(10)] }),
+      description : new FormControl(""),
       date: new FormControl("", { validators: [Validators.required] }),
       time: new FormControl("", { validators: [Validators.required] })
     })
@@ -84,6 +85,10 @@ export class CreatePartyComponent implements OnInit, OnDestroy {
     console.log('Deleting the party details');
     const partyDetail = this.partyForm.getRawValue();
     this.datastoreService.deletePartyDetails(partyDetail);
+    this.router.navigate(['/party']);
+  }
+
+  onNavigate() {
     this.router.navigate(['/party']);
   }
 

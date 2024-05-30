@@ -11,20 +11,32 @@ import { Subscription } from 'rxjs';
 export class PartyDetailsComponent implements OnInit, OnDestroy {
   dataSubscription!: Subscription;
   parties: any = [];
+  partiesPagination: any = [];
+
+  page: number = 0;
+  noOfPages: any = [];
+  recordsPerPage: number = 5;
 
   constructor(private dataStoreService: DatastoreService) { };
 
   ngOnInit(): void {
     this.dataSubscription = this.dataStoreService.partyDetailsSubject.subscribe((partydetails: PartyDetails[]) => {
       this.parties = partydetails;
-      console.log(this.parties)
+      this.addPagination(1);
     })
-
     this.parties = this.dataStoreService.getPartyDetails();
+    this.addPagination(1);
   }
 
-  navigate(party: PartyDetails) {
-    console.log(party);
+  addPagination(page: number) {
+    this.noOfPages = Array.from({ length: Math.ceil(this.parties.length / this.recordsPerPage) }, (_, index) => index + 1);
+    let startIndex = ((page - 1) * this.recordsPerPage);
+    let endIndex = startIndex + this.recordsPerPage;
+    this.partiesPagination = this.parties.slice(startIndex, endIndex)
+  }
+
+  onSearch(event: any) {
+    this.dataStoreService.search(event.target.value);
   }
 
   ngOnDestroy(): void {
