@@ -13,6 +13,7 @@ import { HomepageComponent } from './main/homepage/homepage.component';
 import { AuthComponent } from './auth/auth.component';
 import { ViewCardsComponent } from './main/homepage/view-cards/view-cards.component';
 import { ContactComponent } from './main/homepage/contact/contact.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ContactComponent } from './main/homepage/contact/contact.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

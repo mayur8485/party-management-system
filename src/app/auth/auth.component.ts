@@ -11,13 +11,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
   authForm: any;
-
+  errorMessage: string = "";
   constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.authForm = new FormGroup({
       email: new FormControl('', { validators: [Validators.email] }),
-      password: new FormControl('', { validators: [Validators.minLength(6)] })
+      password: new FormControl('', { validators: [Validators.minLength(6), Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/)] })
     })
   }
 
@@ -25,12 +25,15 @@ export class AuthComponent implements OnInit {
     if (this.authForm.valid) {
       const authData = this.authForm.getRawValue();
       let authFormSubs!: Observable<any>
-      authFormSubs = this.authService.signIn(authData);
+      authFormSubs = this.authService.login(authData);
       authFormSubs.subscribe((resposeData) => {
         if (resposeData) {
           console.log('SignIn Success', resposeData);
           this.router.navigate(['/party']);
         }
+      }, errorMessage => {
+        console.log(errorMessage);
+        this.errorMessage = errorMessage;
       })
     }
   }
@@ -45,6 +48,8 @@ export class AuthComponent implements OnInit {
           console.log('SignUp Success', resposeData);
           this.router.navigate(['/party']);
         }
+      }, errorMessage => {
+
       })
     }
   }
