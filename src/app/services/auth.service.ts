@@ -119,6 +119,9 @@ export class AuthService {
             case 'ADMIN_ONLY_OPERATION':
                 errorMessage = 'Please use provided creds'
                 break;
+            case 'EMAIL_EXISTS':
+                errorMessage = 'Email already exists'
+                break;
         }
 
         return throwError(errorMessage);
