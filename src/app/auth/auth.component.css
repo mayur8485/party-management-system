@@ -1,7 +1,10 @@
 .box {
     width: 100%;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 71px);
     position: relative;
+    background-image:url(https://images.pexels.com/photos/796605/pexels-photo-796605.jpeg?auto=compress&cs=tinysrgb&w=600); 
+    background-repeat: no-repeat;
+    background-size: cover
 }
 
 .blur {

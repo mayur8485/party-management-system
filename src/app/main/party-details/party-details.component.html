@@ -1,47 +1,49 @@
-<div class="box">
-  <form class="d-flex justify-content-center">
-    <div class="form-group col-md-4 my-2 d-flex flex-row">
-      <input type="text" class="form-control" id="search" placeholder="search" (input)="onSearch($event)">
-    </div>
-  </form>
-</div>
-<table class="table" style="height: 300px;">
-  <thead>
-    <tr>
-      <th scope="col" style="max-width: 10px;">Sr No</th>
-      <th scope="col" style="max-width: 50px;">Full Name</th>
-      <th scope="col" style="max-width: 80px;">Address</th>
-      <th scope="col" style="max-width: 50px;">Mobile Number</th>
-      <th scope="col" style="max-width: 50px;">Description</th>
-      <th scope="col" style="max-width: 50px;">Party Date</th>
-      <th scope="col" style="max-width: 50px;">Time</th>
-      <th scope="col" style="max-width: 50px;">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let party of partiesPagination; let i = index">
-      <th scope="row" style="max-width: 10px;">{{i+1}}</th>
-      <td style="max-width: 50px;">{{party.fullName}}</td>
-      <td style="max-width: 80px;">{{party.address}}</td>
-      <td style="max-width: 50px;">{{party.mobileNo}}</td>
-      <td style="max-width: 50px;">{{party.description}}</td>
-      <td style="max-width: 50px;">{{party.date}}</td>
-      <td style="max-width: 50px;">{{party.time}}</td>
-      <td>
-        <div class="dropdown">
-          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" [routerLink]="[party.id,'edit']">Update</a></li>
-            <li><a class="dropdown-item" [routerLink]="[party.id,'delete']">Delete</a></li>
-          </ul>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div class="box d-flex flex-row justify-content-center" style="height: 55px;">
-  <ng-container *ngIf="noOfPages.length>1">
-    <button class="btn btn-tertiary p-2" *ngFor="let page of noOfPages" (click)="addPagination(page)">{{page}}</button>
-  </ng-container>
+<div class="main-box">
+  <div class="box">
+    <form class="d-flex justify-content-center">
+      <div class="form-group col-md-4 my-2 d-flex flex-row">
+        <input type="text" class="form-control" id="search" placeholder="search" (input)="onSearch($event)">
+      </div>
+    </form>
+  </div>
+  <table class="table" style="height: 300px; margin-bottom: 0px;">
+    <thead>
+      <tr>
+        <th scope="col" style="max-width: 10px;">Sr No</th>
+        <th scope="col" style="max-width: 50px;">Full Name</th>
+        <th scope="col" style="max-width: 80px;">Address</th>
+        <th scope="col" style="max-width: 50px;">Mobile Number</th>
+        <th scope="col" style="max-width: 50px;">Description</th>
+        <th scope="col" style="max-width: 50px;">Party Date</th>
+        <th scope="col" style="max-width: 50px;">Time</th>
+        <th scope="col" style="max-width: 50px;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let party of partiesPagination; let i = index">
+        <th scope="row" style="max-width: 10px;">{{i+1}}</th>
+        <td style="max-width: 50px;">{{party.fullName}}</td>
+        <td style="max-width: 80px;">{{party.address}}</td>
+        <td style="max-width: 50px;">{{party.mobileNo}}</td>
+        <td style="max-width: 50px;">{{party.description}}</td>
+        <td style="max-width: 50px;">{{party.date}}</td>
+        <td style="max-width: 50px;">{{party.time}}</td>
+        <td>
+          <div class="dropdown">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" [routerLink]="[party.id,'edit']">Update</a></li>
+              <li><a class="dropdown-item" [routerLink]="[party.id,'delete']">Delete</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="box d-flex flex-row justify-content-center" style="height: 55px;">
+    <ng-container *ngIf="noOfPages.length>1">
+      <button class="btn btn-tertiary p-2" *ngFor="let page of noOfPages" (click)="addPagination(page)">{{page}}</button>
+    </ng-container>
+  </div>
 </div>

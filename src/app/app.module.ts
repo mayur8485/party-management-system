@@ -11,6 +11,8 @@ import { PartyDetailsComponent } from './main/party-details/party-details.compon
 import { AppRoutingModule } from './app-routing.module';
 import { HomepageComponent } from './main/homepage/homepage.component';
 import { AuthComponent } from './auth/auth.component';
+import { ViewCardsComponent } from './main/homepage/view-cards/view-cards.component';
+import { ContactComponent } from './main/homepage/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { AuthComponent } from './auth/auth.component';
     CreatePartyComponent,
     PartyDetailsComponent,
     HomepageComponent,
-    AuthComponent
+    AuthComponent,
+    ViewCardsComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
