@@ -22,7 +22,7 @@ export class CreatePartyComponent implements OnInit, OnDestroy {
       id: new FormControl(""),
       fullName: new FormControl("", { validators: [Validators.required] }),
       address: new FormControl("", { validators: [Validators.required] }),
-      mobileNo: new FormControl("", { validators: [Validators.required, Validators.maxLength(10)] }),
+      mobileNo: new FormControl("", { validators: [Validators.required, Validators.pattern(/^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/)] }),
       description : new FormControl(""),
       date: new FormControl("", { validators: [Validators.required] }),
       time: new FormControl("", { validators: [Validators.required] })
