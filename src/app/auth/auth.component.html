@@ -1,22 +1,25 @@
-<div class="container">
-    <div class="row d-flex justify-content-center m-3">
-        <div class="cols-xs-12 col-md-6 col-md-offset-3 p-3 border border-2 rounded-2">
-            <form [formGroup]="authForm">
-                <div class="form-group py-2">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" required email formControlName="email">
-                </div>
-                <div class="form-group py-2">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required
-                        minlength="6" formControlName="password">
-                </div>
-                <div class="py-2 d-flex justify-content-center">
-                    <button class="btn btn-primary" type="button" (click)="signIn()" [disabled]="!authForm.valid">Signin</button>
-                    <span>&nbsp;</span>
-                    <button class="btn btn-primary" type="button" (click)="signUp()" [disabled]="!authForm.valid">SignUp</button>
-                </div>
-            </form>
+<div class="box d-flex flex-row-reverse">
+    <img class="blur" src="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="partyImage">
+    <div class="container">
+        <div class="row d-flex justify-content-center m-3">
+            <div class="cols-xs-12 col-md-4 col-md-offset-3 p-3 loginForm">
+                <form [formGroup]="authForm">
+                    <div class="form-group py-2 m-2">
+                        <label for="email" class="my-2">Email</label>
+                        <input type="email" class="form-control" id="email" required email formControlName="email">
+                    </div>
+                    <div class="form-group py-2 m-2">
+                        <label for="password" class="my-2">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required
+                            minlength="6" formControlName="password">
+                    </div>
+                    <div class="py-5 d-flex justify-content-around">
+                        <button class="btn btn-primary px-3" type="button" (click)="signIn()" [disabled]="!authForm.valid">Log In</button>
+                        <span>&nbsp;</span>
+                        <button class="btn btn-primary px-3" type="button" (click)="signUp()" [disabled]="!authForm.valid">Sign Up</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

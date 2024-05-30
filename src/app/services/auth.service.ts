@@ -35,7 +35,7 @@ export class AuthService {
                 this.router.navigate(['/party'])
             }
         } else {
-            this.router.navigate(['/auth']);
+            this.router.navigate(['/home']);
         }
     }
 

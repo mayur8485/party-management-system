@@ -20,5 +20,9 @@
                 </button>
             </li>
         </ul>
+        <div *ngIf="!isAuthenticated">
+            <button class="btn btn-tertiary" (click)="login()">Login</button>
+            <button class="btn btn-tertiary" (click)="home()">Home</button>
+        </div>
     </div>
 </nav>
