@@ -63,7 +63,6 @@ export class CreatePartyComponent implements OnInit, OnDestroy {
   onCreatePartyDetails() {
     if (this.partyForm.valid) {
       const partyDetail = this.partyForm.getRawValue();
-      console.log(partyDetail)
       partyDetail.id = this.getRandomNumber();
       if (this.datastoreService.createPartyDetails(partyDetail)) {
         this.partyForm.reset();
@@ -73,7 +72,7 @@ export class CreatePartyComponent implements OnInit, OnDestroy {
   }
 
   onUpdatePartyDetails() {
-    console.log('Updating the party details');
+    // console.log('Updating the party details');
     if (this.partyForm.dirty) {
       const partyDetail = this.partyForm.getRawValue();
       this.datastoreService.updatePartyDetails(partyDetail);
@@ -82,7 +81,7 @@ export class CreatePartyComponent implements OnInit, OnDestroy {
   }
 
   onDeletePartyDetails() {
-    console.log('Deleting the party details');
+    // console.log('Deleting the party details');
     const partyDetail = this.partyForm.getRawValue();
     this.datastoreService.deletePartyDetails(partyDetail);
     this.router.navigate(['/party']);
