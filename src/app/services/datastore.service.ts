@@ -17,7 +17,7 @@ export class DatastoreService {
         const data = this.partyDetails;
         this.http.put('https://party-management-b6df4-default-rtdb.asia-southeast1.firebasedatabase.app/party.json',
             data).subscribe(response => {
-                console.log(response);
+                // console.log(response);
             });
     }
 
@@ -61,7 +61,6 @@ export class DatastoreService {
 
     search(value: string) {
         const filteredData = this.partyDetails.filter((x: any) => Object.values(x).join(";").includes(value));
-        console.log(filteredData)
         this.partyDetailsSubject.next(filteredData);
     }
 
