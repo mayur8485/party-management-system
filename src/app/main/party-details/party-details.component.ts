@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DatastoreService } from 'src/app/services/datastore.service';
 import { PartyDetails } from '../../models/partyDetails.model';
 import { Subscription } from 'rxjs';
@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./party-details.component.css'],
 })
 export class PartyDetailsComponent implements OnInit, OnDestroy {
+  @ViewChild('searchById') searchById: any;
+
   dataSubscription!: Subscription;
   parties: any = [];
   partiesPagination: any = [];
@@ -39,6 +41,19 @@ export class PartyDetailsComponent implements OnInit, OnDestroy {
 
   onSearch(event: any) {
     this.dataStoreService.search(event.target.value);
+  }
+
+  onSearchById() {
+    if(this.searchById && this.searchById?.nativeElement?.value){
+      this.dataStoreService.getPartyDetailsById(+this.searchById?.nativeElement?.value);
+    }
+  }
+
+  onResetSearchById() {
+    if(this.searchById && this.searchById?.nativeElement?.value){
+      this.dataStoreService.fetchParties();
+      this.searchById.nativeElement.value = null
+    }
   }
 
   ngOnDestroy(): void {

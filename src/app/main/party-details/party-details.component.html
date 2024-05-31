@@ -1,6 +1,11 @@
 <div class="main-box">
-  <div class="box">
-    <form class="d-flex justify-content-center">
+  <div class="box-head">
+    <form class="d-flex justify-content-center" style="position: relative;">
+      <div class="form-group col-md-2 my-2 d-flex flex-row" style="position: absolute; right: 10px;">
+        <input type="number" class="form-control" id="search" placeholder="search by Id" #searchById><span>&nbsp;</span>
+        <button class="btn btn-primary" (click)="onSearchById()">Search</button><span>&nbsp;</span>
+        <button class="btn btn-danger" (click)="onResetSearchById()">Reset</button>
+      </div>
       <div class="form-group col-md-4 my-2 d-flex flex-row">
         <input type="text" class="form-control" id="search" placeholder="search" (input)="onSearch($event)">
       </div>
@@ -55,9 +60,9 @@
       </tr>
     </tbody>
   </table>
-  <div class="box d-flex flex-row justify-content-center" style="height: 55px;">
+  <div class="box-footer d-flex flex-row justify-content-center" style="height: 70px;">
     <ng-container *ngIf="noOfPages.length>1">
-      <button class="btn btn-tertiary p-2" *ngFor="let page of noOfPages" (click)="addPagination(page)">{{page}}</button>
+      <button class="btn pagination-btn p-2 border rounded-3 m-2" *ngFor="let page of noOfPages" (click)="addPagination(page)">{{page}}</button>
     </ng-container>
   </div>
 </div>

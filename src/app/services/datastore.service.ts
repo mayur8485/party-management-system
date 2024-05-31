@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { PartyDetails } from "../models/partyDetails.model";
-import { Subject} from "rxjs";
+import { Subject } from "rxjs";
 
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { AuthService } from "./auth.service";
@@ -33,12 +33,12 @@ export class DatastoreService {
         return [...this.partyDetails];
     }
 
-    getCertainPartyDetail(id: any) {
+    getPartyDetailsById(id: any) {
         this.http.request('get', 'https://ap.greatfuturetechno.com/party/', { params: new HttpParams().set('id', id) }).subscribe(
             {
                 next:
                     (response) => {
-                        this.partyDetails = response;
+                        this.partyDetails = [response];
                         this.partyDetailsSubject.next(this.partyDetails);
                     },
                 error: (error) => {
@@ -78,7 +78,7 @@ export class DatastoreService {
         );
     }
 
-    createFormData(body: any) {
+    private createFormData(body: any) {
         const formData = new FormData();
         Object.keys(body).forEach((eachKey: any) => {
             if (eachKey === 'image') {
