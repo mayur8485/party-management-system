@@ -42,7 +42,7 @@ export class CreatePartyComponent implements OnInit, OnDestroy {
         id: new FormControl(""),
         username: new FormControl(""),
         phone_number: new FormControl(""),
-        is_active: new FormControl(""),
+        is_active: new FormControl(true),
       })
     })
 

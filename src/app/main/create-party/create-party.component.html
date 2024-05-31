@@ -114,6 +114,29 @@
                     <input type="file" class="form-control" id="image"  name="image" placeholder="Please enter Image" (change)="onFileChange($event)" [readOnly]="mode === 'delete'" accept="image/*">
                 </div>
 
+                <div formGroupName="userid">
+                    <div class="form-group col-md-12 my-3 d-flex flex-row" *ngIf="mode !== 'create' ">
+                        <label style="width: 300px;align-self: center;">ID</label>
+                        <input type="text" class="form-control" id="id" formControlName="id" [readOnly]="true">
+                    </div>
+
+                    <div class="form-group col-md-12 my-3 d-flex flex-row">
+                        <label style="width: 300px;align-self: center;">User Name</label>
+                        <input type="text" class="form-control" id="username" placeholder="Please enter user name" formControlName="username" [readOnly]="mode === 'delete'">
+                    </div>
+
+
+                    <div class="form-group col-md-12 my-3 d-flex flex-row">
+                        <label style="width: 300px;align-self: center;">Phone No</label>
+                        <input type="text" class="form-control" id="phone_number" placeholder="Please enter phone number" formControlName="phone_number" [readOnly]="mode === 'delete'">
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12 my-3 d-flex flex-row">
+                    <label style="width: 300px;align-self: center;">Pan No</label>
+                    <input type="text" class="form-control" id="pan_no" placeholder="Please enter pan no" formControlName="pan_no" [readOnly]="mode === 'delete'">
+                </div>
+
                 <hr>
                 <hr>
                     <div formArrayName="bank_id">
@@ -235,7 +258,7 @@
             <div class="d-flex justify-content-center align-items-center my-5">
                 <button type="submit" *ngIf="mode==='create'" class="btn btn-primary" [disabled]="!partyForm.valid">Create Party</button>
                 <span>&nbsp;</span>
-                <button type="button" *ngIf="mode==='edit' || mode==='delete'" class="btn btn-primary" (click)="onNavigate()">Back</button>
+                <button type="button" class="btn btn-primary" (click)="onNavigate()">Back</button>
                 <span>&nbsp;</span>
                 <button type="button" *ngIf="mode==='edit'" class="btn btn-primary" (click)="onUpdatePartyDetails()" [disabled]="!partyForm.valid" [disabled]="!partyForm.dirty">Update Party Details</button>
                 <span>&nbsp;</span>
