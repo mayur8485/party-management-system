@@ -9,25 +9,39 @@
   <table class="table" style="height: 300px; margin-bottom: 0px; background-color: white;">
     <thead>
       <tr>
-        <th scope="col" style="max-width: 10px;">Sr No</th>
-        <th scope="col" style="max-width: 50px;">Full Name</th>
-        <th scope="col" style="max-width: 80px;">Address</th>
-        <th scope="col" style="max-width: 50px;">Mobile Number</th>
-        <th scope="col" style="max-width: 50px;">Description</th>
-        <th scope="col" style="max-width: 50px;">Party Date</th>
-        <th scope="col" style="max-width: 50px;">Time</th>
-        <th scope="col" style="max-width: 50px;">Action</th>
+        <th scope="col" style="max-width: 10px;">Id</th>
+        <th scope="col" style="max-width: 50px;">Name</th>
+        <th scope="col" style="max-width: 50px;">Company Name</th>
+        <th scope="col" style="max-width: 50px;">Mobile No</th>
+        <th scope="col" style="max-width: 50px;">Email</th>
+        <th scope="col" style="max-width: 50px;">Remark</th>
+        <th scope="col" style="max-width: 50px;">DOB</th>
+        <th scope="col" style="max-width: 50px;">Anniversary Date</th>
+        <th scope="col" style="max-width: 50px;">GSTIN</th>
+        <th scope="col" style="max-width: 50px;">Pan No</th>
+        <th scope="col" style="max-width: 50px;">Apply Tds</th>
+        <th scope="col" style="max-width: 50px;">Credit Limit</th>
+        <th scope="col" style="max-width: 50px;">is Active</th>
+        <th scope="col" style="max-width: 50px;">Image</th>
+        <th scope="col" style="max-width: 50px;">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let party of partiesPagination; let i = index">
-        <th scope="row" style="max-width: 10px;">{{startIndex + i+1}}</th>
-        <td style="max-width: 50px;">{{party.fullName}}</td>
-        <td style="max-width: 80px;">{{party.address}}</td>
-        <td style="max-width: 50px;">{{party.mobileNo}}</td>
-        <td style="max-width: 50px;">{{party.description}}</td>
-        <td style="max-width: 50px;">{{party.date}}</td>
-        <td style="max-width: 50px;">{{party.time}}</td>
+        <th scope="row" style="max-width: 10px;">{{party.id}}</th>
+        <th scope="row" style="max-width: 10px;">{{party.name}}</th>
+        <td style="max-width: 50px;" class="text-nowrap text-truncate">{{party.company_name}}</td>
+        <td style="max-width: 50px;" class="text-nowrap text-truncate">{{party.mobile_no}}</td>
+        <td style="max-width: 50px;" class="text-nowrap text-truncate">{{party.email}}</td>
+        <td style="max-width: 50px;" class="text-nowrap text-truncate">{{party.remark}}</td>
+        <td style="max-width: 50px;" class="text-nowrap text-truncate">{{party.date_of_birth}}</td>
+        <td style="max-width: 50px;" class="text-nowrap text-truncate">{{party.anniversary_date}}</td>
+        <td style="max-width: 50px;" class="text-nowrap text-truncate">{{party.gstin}}</td>
+        <td style="max-width: 50px;" class="text-nowrap text-truncate">{{party.pan_no}}</td>
+        <td style="max-width: 50px;" class="text-nowrap text-truncate">{{party.apply_tds}}</td>
+        <td style="max-width: 50px;" class="text-nowrap text-truncate">{{party.credit_limit}}</td>
+        <td style="max-width: 50px;" class="text-nowrap text-truncate">{{party.is_active}}</td>
+        <td style="max-width: 50px;" class="text-nowrap text-truncate">{{party.image}}</td>
         <td>
           <div class="dropdown">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">

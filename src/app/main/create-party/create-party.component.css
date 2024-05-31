@@ -9,3 +9,28 @@ input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched {
     background-repeat: no-repeat;
     background-size: cover
 }
+
+.myform {
+    height: calc(100vh - 100px);
+    overflow: auto;
+}
+
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    -webkit-box-shadow: inset 0px 0px 6px rgba(14, 41, 63, 0.705);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    -webkit-box-shadow: inset 0px 0px 6px rgba(247, 247, 247, 0.979);
+}
+
+
+hr.half-width{
+    width:50%;
+    margin: 0 auto;
+  }

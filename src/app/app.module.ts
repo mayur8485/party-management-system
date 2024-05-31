@@ -13,7 +13,8 @@ import { HomepageComponent } from './main/homepage/homepage.component';
 import { AuthComponent } from './auth/auth.component';
 import { ViewCardsComponent } from './main/homepage/view-cards/view-cards.component';
 import { ContactComponent } from './main/homepage/contact/contact.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorService } from './services/auth-interceptors.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,11 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

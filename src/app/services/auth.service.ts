@@ -2,19 +2,6 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, catchError, tap, throwError } from "rxjs";
-import { User } from "../models/user.model";
-import { environment } from "../environments/environment.prod";
-
-
-export interface AuthResponseData {
-    kind: string,
-    idToken: string,
-    email: string;
-    refreshToken: string,
-    expiresIn: string,
-    localId: string,
-    registered?: boolean,
-}
 
 @Injectable({
     providedIn: 'root'
@@ -26,35 +13,23 @@ export class AuthService {
 
     constructor(private http: HttpClient, private router: Router) { }
 
-    signUp(creds: any) {
-        return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.fireBaseKey,
-            {
-                email: creds.email,
-                password: creds.password,
-                returnSecureToken: true
-            }).pipe(catchError(this.handleError), tap(
-                respData => {
-                    this.handleAuthentication(respData.email, respData.localId, respData.idToken, +respData.expiresIn);
-                }
-            ));
+    saveCreds(creds: any) {
+        this.user.next(creds);
+        localStorage.setItem('user', JSON.stringify(creds));
     }
 
-
     login(creds: any) {
-        return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.fireBaseKey,
-            {
-                email: creds.email,
-                password: creds.password,
-                returnSecureToken: true
-            }).pipe(catchError(this.handleError), tap(
-                respData => {
-                    this.handleAuthentication(respData.email, respData.localId, respData.idToken, +respData.expiresIn);
-                }
-            ));
+        const formData = new FormData();
+        formData.append("username", creds.username);
+        formData.append("password", creds.password);
+
+        return this.http.post('https://ap.greatfuturetechno.com/login/', formData).pipe(catchError(this.handleError), tap(
+            respData => { this.saveCreds(respData) }
+        ))
     }
 
     autoLogin() {
-        let data = localStorage.getItem('userData');
+        let data = localStorage.getItem('user');
         if (data) {
             const user = JSON.parse(data);
             if (user) {
@@ -66,49 +41,25 @@ export class AuthService {
         }
     }
 
-    logOut() {
-        this.user.next(null);
-        this.router.navigate(['auth']);
-        localStorage.removeItem('userData');
-    }
-
-    logout() {
+    clearLocalStorage() {
         this.user.next(null);
         this.router.navigate(['/auth']);
-        localStorage.removeItem('userData');
-        if (this.tokenExpirationTimer) {
-            clearTimeout(this.tokenExpirationTimer);
-        }
-        this.tokenExpirationTimer = null;
+        localStorage.removeItem('user');
     }
 
-    autoLogout(expirationDuration: number) {
-        this.tokenExpirationTimer = setTimeout(() => {
-            this.logout();
-        }, expirationDuration);
-    }
-
-
-    private handleAuthentication(email: string, localId: string, idToken: string, expiresIn: number) {
-        const expirationDate = new Date(new Date().getTime() + (expiresIn * 1000));
-        const user = new User(email, localId, idToken, expirationDate);
-        this.user.next(user);
-        this.autoLogout(expiresIn * 1000);
-        localStorage.setItem('userData', JSON.stringify(user));
+    logOut() {
+        this.http.request('post', 'https://ap.greatfuturetechno.com/logout/').subscribe((res) => { console.log(res) });
+        this.clearLocalStorage();
     }
 
     private handleError(errorRes: HttpErrorResponse) {
         let errorMessage = 'An unknown error occur';
-
-        if (!errorRes.error || !errorRes.error.error) {
-            return throwError(errorMessage);
-        }
-        switch (errorRes.error.error.message) {
-            case 'EMAIL_EXIST':
-                errorMessage = 'This email exists already';
+        switch (errorRes.error.msg) {
+            case "Invalid Password":
+                errorMessage = "Invalid Password";
                 break;
-            case 'EMAIL_NOT_FOUND':
-                errorMessage = 'This email doesnot exist';
+            case "Invalid Username":
+                errorMessage = "Invalid Username";
                 break;
             case 'INVALID_PASSWORD':
                 errorMessage = 'Oops!.. Wrong password';

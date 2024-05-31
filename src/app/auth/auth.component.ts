@@ -16,42 +16,39 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     this.authForm = new FormGroup({
-      email: new FormControl('', { validators: [Validators.email] }),
-      password: new FormControl('', { validators: [Validators.minLength(6), Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/)] })
+      username: new FormControl(''),
+      password: new FormControl('')
     })
   }
 
   signIn() {
-    if (this.authForm.valid) {
-      const authData = this.authForm.getRawValue();
-      let authFormSubs!: Observable<any>
-      authFormSubs = this.authService.login(authData);
-      authFormSubs.subscribe((resposeData) => {
-        if (resposeData) {
-          // console.log('SignIn Success', resposeData);
-          this.router.navigate(['/party']);
-        }
-      }, errorMessage => {
-        // console.log(errorMessage);
-        this.errorMessage = errorMessage;
-      })
-    }
+    const authData = this.authForm.getRawValue();
+    let authFormSubs!: Observable<any>
+    authFormSubs = this.authService.login(authData);
+    authFormSubs.subscribe((resposeData) => {
+      if (resposeData) {
+        this.router.navigate(['/party']);
+      }
+    }, errorMessage => {
+      this.errorMessage = errorMessage;
+    })
+
   }
 
-  signUp() {
-    if (this.authForm.valid) {
-      const authData = this.authForm.getRawValue();
-      let authFormSubs!: Observable<any>
-      authFormSubs = this.authService.signUp(authData);
-      authFormSubs.subscribe((resposeData) => {
-        if (resposeData) {
-          // console.log('SignUp Success', resposeData);
-          this.router.navigate(['/party']);
-        }
-      }, errorMessage => {
-        this.errorMessage = errorMessage;
-      })
-    }
-  }
+  // signUp() {
+  //   if (this.authForm.valid) {
+  //     const authData = this.authForm.getRawValue();
+  //     let authFormSubs!: Observable<any>
+  //     authFormSubs = this.authService.signUp(authData);
+  //     authFormSubs.subscribe((resposeData) => {
+  //       if (resposeData) {
+  //         // console.log('SignUp Success', resposeData);
+  //         this.router.navigate(['/party']);
+  //       }
+  //     }, errorMessage => {
+  //       this.errorMessage = errorMessage;
+  //     })
+  //   }
+  // }
 
 }
