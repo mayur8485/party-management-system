@@ -161,6 +161,33 @@ export class CreatePartyComponent implements OnInit, OnDestroy {
     }
   }
 
+  patchValue() {
+    const dirtyValue = this.getDirtyValues(this.partyForm);
+    if(dirtyValue) {
+      const partyDetail = this.partyForm.getRawValue();
+      dirtyValue['gstin'] = partyDetail['gstin'];
+      this.datastoreService.patchValue(dirtyValue,+partyDetail["id"]);
+      this.router.navigate(['/party']);
+    }
+  }
+
+
+  getDirtyValues(form: FormGroup): any {
+    let dirtyValues:any = {};
+    Object.keys(form.controls).forEach(key => {
+      const currentControl = form.get(key);
+      // const isRequired = currentControl?.validator ? currentControl.validator({} as any)?.['required'] : false;
+      if (currentControl?.dirty) {
+        if (currentControl instanceof FormGroup) {
+          dirtyValues[key] = this.getDirtyValues(currentControl);
+        } else {
+          dirtyValues[key] = currentControl?.value;
+        }
+      }
+    });
+    return dirtyValues;
+  }
+
   onDeletePartyDetails() {
     // console.log('Deleting the party details');
     const partyDetail = this.partyForm.getRawValue();
