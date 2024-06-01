@@ -18,7 +18,7 @@ export class PartyDetailsComponent implements OnInit, OnDestroy {
   page: number = 0;
   noOfPages: any = [];
   recordsPerPage: number = 5;
-  startIndex:number = 0;
+  startIndex: number = 0;
 
   constructor(private dataStoreService: DatastoreService) { };
 
@@ -44,16 +44,14 @@ export class PartyDetailsComponent implements OnInit, OnDestroy {
   }
 
   onSearchById() {
-    if(this.searchById && this.searchById?.nativeElement?.value){
+    if (this.searchById && this.searchById?.nativeElement?.value) {
       this.dataStoreService.getPartyDetailsById(+this.searchById?.nativeElement?.value);
     }
   }
 
   onResetSearchById() {
-    if(this.searchById && this.searchById?.nativeElement?.value){
-      this.dataStoreService.fetchParties();
-      this.searchById.nativeElement.value = null
-    }
+    this.dataStoreService.fetchParties();
+    this.searchById.nativeElement.value = null
   }
 
   ngOnDestroy(): void {
